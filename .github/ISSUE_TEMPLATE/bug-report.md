@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help locating the issue
 title: ''
 labels: bug
-assignees: iharosi
+assignees: egb116
 
 ---
 

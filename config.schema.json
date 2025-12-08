@@ -2,13 +2,13 @@
   "pluginAlias": "PlexWebhooks",
   "pluginType": "platform",
   "singular": true,
-  "headerDisplay": "Once you've ready with the configuration, you'll find the listening URL in the Homebridge logs. The URL should be added on your Plex Media Server's Webhooks page. You can find more details about the configuration on the [plugin's GitHub page](https://github.com/iharosi/homebridge-plex-webhooks/blob/master/README.md).",
-  "footerDisplay": "If you like this plugin, support the developer via [paypal](https://www.paypal.me/iharosi).",
+  "headerDisplay": "Once you're ready with the configuration, you'll find the listening URL in the Homebridge logs. The URL should be added on your Plex Media Server's Webhooks page. You can find more details about the configuration on the [plugin's GitHub page](https://github.com/egb116/homebridge-plex-webhooks/blob/master/README.md).",
+  "footerDisplay": "If you like this plugin, [Buy Me a Coffee!](https://buymeacoffee.com/ericbowers).",
   "schema": {
     "type": "object",
     "properties": {
       "name": {
-        "title": "Name",
+        "title": "Platform Name",
         "type": "string",
         "default": "Plex Webhooks Platform",
         "minLength": 3,
@@ -22,28 +22,28 @@
           "title": "Sensor",
           "properties": {
             "name": {
-              "title": "Name",
+              "title": "Sensor Name",
               "type": "string",
-              "placeholder": "e.g.: Plex Movies",
-              "description": "This will be the name of your sensor in Home app",
+              "placeholder": "e.g., Plex Movies",
+              "description": "This will be the name of your sensor in the Home app",
               "required": true
             },
             "filters": {
               "type": "array",
-              "title": "Filter rulesets",
+              "title": "Filter Rulesets",
               "minItems": 1,
               "items": {
                 "type": "array",
-                "title": "Path-value pairs",
+                "title": "Path-Value Pairs",
                 "minItems": 1,
                 "items": {
                   "type": "object",
-                  "title": "One path-value pair",
+                  "title": "Path-Value Pair",
                   "properties": {
                     "path": {
-                      "title": "The path of the property to get",
+                      "title": "Path",
                       "type": "string",
-                      "placeholder": "e.g.: Player.title",
+                      "placeholder": "e.g., Player.title",
                       "typeahead": {
                         "source": [
                           "user",
@@ -65,19 +65,19 @@
                       "required": true
                     },
                     "operator": {
-                      "title": "The operator",
+                      "title": "Operator",
                       "type": "string",
                       "default": "===",
                       "oneOf": [
-                        { "title": "===", "enum": ["==="] },
-                        { "title": "!==", "enum": ["!=="] }
+                        { "title": "Equal", "enum": ["==="] },
+                        { "title": "Not Equal", "enum": ["!=="] }
                       ],
                       "required": true
                     },
                     "value": {
-                      "title": "The value",
+                      "title": "Value",
                       "type": "string",
-                      "placeholder": "e.g.: Apple TV",
+                      "placeholder": "e.g., Apple TV",
                       "required": true
                     }
                   }
@@ -94,25 +94,27 @@
           "port": {
             "title": "Port",
             "type": "number",
-            "placeholder": "e.g.: 32401",
+            "placeholder": "e.g., 32401",
             "minimum": 1024,
             "maximum": 65535,
             "required": false,
             "description": "Port can be given between 1024 and 65535. In case port is omitted, the default 32401 will be used."
           },
           "address": {
-            "title": "IP address",
+            "title": "IP Address",
             "type": "string",
             "format": "ipv4",
-            "placeholder": "e.g.: 192.168.88.100",
+            "placeholder": "e.g., 192.168.88.100",
             "required": false,
-            "description": "The server can be forced to bind to the specified IP address. In case it's omitted, server will bind to the default interface."
+            "description": "The server can be forced to bind to the specified IP address. If omitted, it will bind to the default interface."
           }
         }
       },
       "verbose": {
-        "title": " verbose logging",
-        "type": "boolean"
+        "title": "Verbose Logging",
+        "type": "boolean",
+        "default": false,
+        "description": "Enable verbose logging for debugging purposes. This will log Plex payloads and filter matching details."
       }
     }
   },
@@ -123,15 +125,15 @@
     {
       "key": "sensors",
       "type": "tabarray",
-      "add": "New",
-      "remove": "Delete",
+      "add": "New Sensor",
+      "remove": "Delete Sensor",
       "style": { "remove": "btn-danger" },
       "title": "{{ value.name || 'Sensor #' + $index }}",
       "items": [
         "sensors[].name",
         {
           "key": "sensors[]",
-          "title": "Filter criterias",
+          "title": "Filter Criteria",
           "type": "section",
           "expandable": true,
           "expanded": false,
@@ -139,25 +141,25 @@
           "items": [
             {
               "type": "help",
-              "helpvalue": "<p class=\"primary-text\">For the specified sensor to be activated, all the given path-value pairs in the ruleset must found in Plex's payload. In case multiple rulesets have been given, at least one ruleset of path-value pairs must found in the payload.</p>"
+              "helpvalue": "<p class=\"primary-text\">For the specified sensor to be activated, all given path-value pairs in the ruleset must be found in Plex's payload. If multiple rulesets are defined, at least one of them must match the payload.</p>"
             },
             {
               "key": "sensors[].filters",
               "type": "section",
-              "title": "Filter rulesets (logical relation: OR)",
-              "buttonText": "Add a filter ruleset",
+              "title": "Filter Rulesets (Logical Relation: OR)",
+              "buttonText": "Add a Filter Rule",
               "orderable": false,
               "items": [
                 {
                   "key": "sensors[].filters[]",
-                  "title": "Path-value pairs (logical relation: AND)",
+                  "title": "Path-Value Pairs (Logical Relation: AND)",
                   "type": "section",
                   "orderable": false,
-                  "buttonText": "Add a path-value pair",
+                  "buttonText": "Add Path-Value Pair",
                   "items": [
                     {
                       "key": "sensors[].filters[][]",
-                      "title": "Path-value pair",
+                      "title": "Path-Value Pair",
                       "type": "flex",
                       "flex-flow": "row wrap",
                       "items": [
@@ -188,14 +190,14 @@
     },
     {
       "key": "server",
-      "title": "Webhooks server",
+      "title": "Webhooks Server Configuration",
       "type": "fieldset",
       "expandable": true,
       "expanded": false,
       "items": [
         {
           "type": "help",
-          "helpvalue": "<p class=\"primary-text\">Listening port and IP address customization of the plugin's webhooks server</p>"
+          "helpvalue": "<p class=\"primary-text\">Configure the listening port and IP address for the webhook server.</p>"
         },
         {
           "type": "div",
@@ -210,14 +212,14 @@
     },
     {
       "key": "logging",
-      "title": "Logging",
+      "title": "Logging Configuration",
       "type": "fieldset",
       "expandable": true,
       "expanded": false,
       "items": [
         {
           "type": "help",
-          "helpvalue": "<p class=\"primary-text\">For debugging purposes. With verbose logging the plugin will log Plex's payload and path-value pair matching information into the Homebridge logs.</p>"
+          "helpvalue": "<p class=\"primary-text\">Enable verbose logging to help with debugging. The plugin will log detailed information about Plex payloads and filter matching.</p>"
         },
         "verbose"
       ]

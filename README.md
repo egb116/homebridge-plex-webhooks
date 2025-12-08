@@ -1,20 +1,15 @@
-# ⚠️ Looking for contributors ⚠️
-This project is looking for contributors/collaborators. Feel free to contact me if you have time for managing this plugin.
+# ⚠️ Beta Plugin ⚠️
+This project is an attempt to update the previous version to be supported in Homebridge v2 for my own use. I'm sure you could do a better job at maintaining it, so please feel free to fork and update!
 
 # Plex Webhooks Server plugin for Homebridge
-[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)  
-[![license](https://badgen.net/github/license/iharosi/homebridge-plex-webhooks)](https://github.com/iharosi/homebridge-plex-webhooks/blob/master/LICENSE)
-[![version](https://badgen.net/npm/v/homebridge-plex-webhooks)](https://www.npmjs.com/package/homebridge-plex-webhooks)
-[![downloads](https://badgen.net/npm/dt/homebridge-plex-webhooks)](https://www.npmjs.com/package/homebridge-plex-webhooks)
-[![vulnerabilities](https://badgen.net/snyk/iharosi/homebridge-plex-webhooks)](https://snyk.io/test/github/iharosi/homebridge-plex-webhooks)  
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/iharosi)
+[![license](https://badgen.net/github/license/egb116/homebridge-plex-webhooks)](https://github.com/egb116/homebridge-plex-webhooks/blob/master/LICENSE)
+[<a href="https://buymeacoffee.com/ericbowers"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="100"/></a>](https://buymeacoffee.com/ericbowers)
 
 This [Homebridge](https://github.com/homebridge/homebridge) plugin can expose occupancy sensor(s) in Home app what will trigger occupancy when media starts playing through a Plex client. Thanks to the unlimited filtering criterias, occupancy events can be controlled based on several different attributes (e.g.: Plex servers, Plex clients, Plex users, media types, media metadata). 
 
 This plugin uses Plex's [Webhooks](https://support.plex.tv/articles/115002267687-webhooks/) feature which is the best available option at the moment to create quick and smooth automation experience. 
 
 Please note, Webhooks are a premium feature and requires an active [Plex Pass Subscription](https://support.plex.tv/articles/categories/intro-to-plex/plex-pass-subscriptions/) for the Plex Media Server account. Based on past years experience, once or twice a year Plex Inc discounts its life time licence.  
-However, if you don't own or plan to buy Plex Pass, you can try this plugin instead, but please note I'm not planning to maintain this plugin anymore: [homebridge-plex-v2](https://github.com/iharosi/homebridge-plex-v2) 
 
 ## Installation
 
@@ -33,6 +28,10 @@ Or, you can install it for root but please be aware of the security risks:
 ```sh
 sudo npm install -g --unsafe-perm homebridge-plex-webhooks
 ``` 
+
+## Compatibility
+
+This plugin has been updated to attempt to be compatible with Homebridge 2.0 and above. Please ensure you are using a version of Homebridge that supports the latest plugin configurations and updates.
 
 ## Configuration
 
@@ -154,7 +153,3 @@ Add this URL as a webhook URL on your [Plex Media Server Webhooks settings page]
 ![pms webhooks settings](images/pms_webhooks.png)
 
 In case your Homebridge server and PMS server is not on the same network, must probably you need to use NAT.
-
-## Questions, issues, feature requests
-
-Before you [raise a ticket](https://github.com/iharosi/homebridge-plex-webhooks/issues/new/choose), try to run Homebridge with the `--debug` option or set verbose logging for the plugin and look for the payload in console. Make sure your config is valid and your filtering rules are correct. For easier debugging, please provide your config.

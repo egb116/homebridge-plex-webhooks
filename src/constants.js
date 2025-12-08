@@ -1,3 +1,5 @@
+'use strict';
+
 const {
   author: PKG_AUTHOR,
   name: PKG_NAME,
@@ -5,14 +7,16 @@ const {
 } = require('../package.json');
 
 const LISTENING_PORT = 32401;
-const PLAY_EVENTS = [
+
+const PLAY_EVENTS = Object.freeze([
   'media.play',
   'media.resume'
-];
-const PAUSE_EVENTS = [
+]);
+
+const PAUSE_EVENTS = Object.freeze([
   'media.pause',
   'media.stop'
-];
+]);
 
 module.exports = {
   LISTENING_PORT,

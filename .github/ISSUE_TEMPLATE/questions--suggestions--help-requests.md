@@ -4,7 +4,7 @@ about: If you've stucked with setting up the plugin, or you would like to sugges
   some changes, or have a question
 title: ''
 labels: help wanted, question
-assignees: iharosi
+assignees: egb116
 
 ---
 

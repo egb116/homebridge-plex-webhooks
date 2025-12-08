@@ -1,4 +1,13 @@
+'use strict';
+
+const escapeHtml = str =>
+  String(str).replace(/[&<>"']/g, m => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]
+  ));
+
 const landingPage = url => {
+  const safeUrl = escapeHtml(url);
+
   return `
     <!doctype html>
     <html lang="en">
@@ -6,7 +15,7 @@ const landingPage = url => {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Landing Page - Plex Webhooks Homebridge Plugin">
-        <title>Landing Page - Plex Webhooks Homebridge Plugin</title>
+        <title>Plex Webhooks - Homebridge Plugin</title>
         <style>
           html, body {
             width: 100%;
@@ -16,6 +25,8 @@ const landingPage = url => {
             font-family: "Open Sans Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-size: 14px;
             font-weight: normal;
+            margin: 0;
+            padding: 0;
           }
           .container {
             display: flex;
@@ -33,12 +44,8 @@ const landingPage = url => {
             font-size: 14px;
             height: 40px;
             padding: 4px 1em;
-            transition-delay: 0s, 0s;
-            transition-duration: 0.2s, 0.2s;
-            transition-property: background-color, color;
-            transition-timing-function: ease, ease;
+            transition: 0.2s ease;
             width: 280px;
-            -webkit-appearance: none;
             outline: none;
             border: none;
             box-sizing: border-box;
@@ -48,23 +55,26 @@ const landingPage = url => {
             background-color: rgb(238, 238, 238);
             color: rgb(85, 85, 85);
           }
-          a, a:visited {
+          a {
             color: #cc7b19;
             text-decoration: none;
             transition: color .2s;
           }
-          a:hover, a:active {
+          a:hover {
             color: #fff;
           }
         </style>
       </head>
       <body>
         <div class="container">
-          <p>Add this URL on the<br /><a href="https://app.plex.tv/desktop#!/settings/webhooks" target="_blank">Webhooks page</a> of your PMS server:</p>
-          <input class="input" type="text" value="${url}" size="64" onClick="this.select()" />
+          <p>Add this URL on the<br />
+            <a href="https://app.plex.tv/desktop#!/settings/webhooks" target="_blank"
+              >Webhooks page</a> of your Plex Media Server:
+          </p>
+          <input class="input" type="text" value="${safeUrl}" onClick="this.select()" />
         </div>
       </body>
-  </html>
+    </html>
   `;
 };
 
