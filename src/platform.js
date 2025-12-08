@@ -189,14 +189,7 @@ class PlexWebhooksPlatform {
   }
 
   _shutdown() {
-    if (this.server) {
-      this.log.info('Shutting down Plex Webhooks server...');
-      try {
-        this.server.close();
-      } catch (err) {
-        this.log.error('Error shutting down Plex Webhooks server:', err.message);
-      }
-    }
+    this.server.close();
   }
 }
 
